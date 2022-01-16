@@ -1,0 +1,44 @@
+{% extends "layout.html" %}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sipariş Oluşturma Sayfası</title>
+    
+</head>
+<body>
+
+
+
+<div class="d-flex flex-col justify-content-center mt-5">
+    <form action="/selectproduce/" method="post">
+        {% csrf_token %}
+    
+        <label >Müşteri Seçiniz</label>
+    <select class="form-control" name="customerId" >
+        {% for cst in customerlist %}
+        <option>{{cst.customerId}}</option>       
+        
+            {% endfor %}
+    </select>
+    <input type="submit" class="form-control btn btn-success mt-3" value="Müşteri Seç" >
+    
+
+</form>
+</div>
+{% endblock %}
+
+
+
+
+
+
+
+
+
+    
+</body>
+</html>

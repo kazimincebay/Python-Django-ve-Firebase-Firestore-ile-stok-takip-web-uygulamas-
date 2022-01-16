@@ -1,0 +1,39 @@
+{% extends "layout.html" %}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fatura Listeleme Sayfası</title>
+</head>
+<body>
+
+    
+    {% for per in billlist %}
+    <div class="col-sm-12 col-md-12 col-lg-12 d-flex flex-col justify-content-center mx-auto">
+    <div class="card mt-4" style="width: 28rem;">
+        <div class="card-body">
+Fatura Id: {{per.billId}} <br>
+Müşteri Id: {{per.customer}} <br>
+Fatura Oluşturma Tarihi: {{per.billcreatedate}} <br>
+Fatura Tutarı: {{per.totalprice}} <br>
+Vergi Tutarı : {{per.taxprice}} <br>
+Vergi Dahil Fatura Tutarı : {{per.taxtotalprice}} <br>
+<div class="float-left ">
+<label><b>Ürün Adedi</b></label><br>
+{% for i in per.numberlist %}{{i}} <br>{% endfor %}
+</div>
+<div class="float-left ml-3">
+    <label><b>Ürün Barkodu</b></label><br>
+    {% for i in per.products %}{{i}} <br>{% endfor %}
+</div> <br>
+</div>
+</div>
+</div>
+{% endfor %}
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,45 @@
+{% extends "layout.html" %}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Müşteri Ekleme Sayfası</title>
+</head>
+<body>
+<div class="d-flex flex-col justify-content-center">
+<form action="/addCustomer/" method="post" >
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Müşteri Adı</label>
+        <input type="text" class="form-control" name="customerName">
+      </div>
+      <div class="form-group">
+        <label>Müşteri Soyadı</label>
+        <input type="text" class="form-control" name="customerSurname">
+      </div>
+      <div class="form-group">
+        <label>Müşteri Vergi Numarası</label>
+        <input type="number" class="form-control" name="customerVergiNo">
+      </div>
+      <div class="form-group">
+        <label>Müşteri E-Posta Adresi</label>
+        <input type="email" class="form-control" name="customerEmail">
+      </div>
+      <div class="form-group">
+        <label>Müşteri Telefon Numarası</label>
+        <input type="number" class="form-control" name="customerPhoneNumber">
+      </div>
+      <div class="form-group">
+        <label>Müşteri Adresi</label>
+        <textarea class="form-control"  name="customerAdress" cols="30" rows="10"></textarea>
+      </div>
+   
+      <button type="submit" class="btn btn-success ml-auto">Müşteri Ekle</button>
+</form>
+</div>
+</body>
+</html>
+{% endblock %}

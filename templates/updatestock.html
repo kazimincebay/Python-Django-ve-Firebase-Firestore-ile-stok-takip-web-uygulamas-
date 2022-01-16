@@ -1,0 +1,29 @@
+{% extends "layout.html" %}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stok Güncelleme Sayfası</title>
+</head>
+<body>
+    {% csrf_token %}
+    
+    <div class="col-6 d-flex flex-col justify-content-center mx-auto mt-2"> 
+    <form action="/updatestockk/" method="post" >
+        {% csrf_token %}
+            <label>Stok Güncellenecek Ürün Barkodu : {{productuid}}</label><br>
+            <div class="form-group">
+            <label>Stok Sayısını Giriniz</label>
+            <input type="text" class="form-control" name="producestock">
+          </div>
+        <br>
+        <input type="hidden" name="productuid" class="form-control" value="{{productuid}}">
+        <input type="submit"  class="form-control btn btn-success " value="Stok Sayısını Güncelle">
+    </form>
+</div>
+</body>
+</html>
+{% endblock %}

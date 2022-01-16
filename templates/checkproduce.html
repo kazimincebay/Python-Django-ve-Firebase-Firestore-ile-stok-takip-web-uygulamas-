@@ -1,0 +1,49 @@
+{% extends "layout.html" %}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ürün Listeleme Sayfası</title>
+</head>
+<body>
+    {% if msg %}
+       <p class="text-center">{{ msg }}</p>
+      {% endif %}   <br>
+    {% csrf_token %}
+        
+    
+ <div class="container">
+<div class="row mx-auto">
+{% for per in productlist %}
+<div class="col-sm-12 col-md-6 col-lg-4 d-flex flex-col justify-content-center">
+<div class="card mt-4" style="width: 27rem;">
+<img class="card-img-top img-fluid mx-auto" src="{{per.produceImageURL}}" alt="produceImage" style="width:225px;height:225px;"><br>
+<div class="card-body">
+    <h5 class="card-title text-center">{{per.produceName}} <br></h5>
+Ürün Kategorisi : {{per.produceCategory}} <br>
+Ürün Id : <abbr style="text-decoration: none;" title="{{per.produceCode}}"> {{per.produceCode | truncatechars:15 }}</abbr> <br>
+Ürün Unique Id : <abbr style="text-decoration: none;"  title="{{per.id}}">{{per.id | truncatechars:4 }}</abbr> <br>
+Ürün Stok Sayısı : {{per.produceStock}} <br>
+Ürün Fiyatı : {{per.producePrice}}  ₺<br>
+Ürün Açıklaması : {{per.produceDescription}} <br>
+<form action="/updatestock/" method="post">
+    {% csrf_token %}
+    <input type="hidden" name="productuid" value="{{per.id}}">
+    <div class="text-center mt-2"><input type="submit" value="Stok Güncelle" class="btn btn-primary"></div>
+</form>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+
+
+
+
+    
+</body>
+</html>
+{% endblock %}

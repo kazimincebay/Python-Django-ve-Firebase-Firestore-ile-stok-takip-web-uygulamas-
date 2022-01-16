@@ -1,0 +1,62 @@
+{% extends "layout.html" %}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sipariş Oluşturma Sayfası</title>
+</head>
+<body>
+ 
+<form action="/addproducelist/" method="post"  class="d-flex flex-col justify-content-center mt-5 mx-auto">
+    {% csrf_token %}
+    <div class="form-group">
+        <label>Ürün ve Adet Seçiniz</label>
+        <select class="form-control" name="produceinfo" >
+            {% for per in productlist %}
+          <option>{{per.produceCode}}</option>
+         
+          {% endfor %}
+        </select>
+        <div class="form-group">
+            <input type="number" class="form-control text-center" name="adet" min="1" value="1" >
+          </div>   
+<br><br><br>
+
+<input type="submit" class="form-control btn btn-primary" value="Ürünü Sepete Ekle">
+</form>  
+<table>
+<tr>
+    <th>Ürün Adedi</th>
+    <th>Ürün Barkodu</th>
+</tr>
+<tr>
+    <td>{% for adet in orderproductsnumberlist %}
+    
+        
+        <p> {{ adet }}</p> <br>
+        {% endfor %}</td>
+        <td>{% for products in orderproductslist %}
+            <p> {{  products }}  </p> <br>
+        
+        
+            {% endfor %}</td>
+</tr>
+<tr>
+    <td><a href="{%url 'clearorderproductslist'%}" class="btn btn-danger">Sepeti Temizle</a></td>
+    <td><a href="{%url 'confirmorder' %}" class="btn btn-success text-center">Siparişi Tamamla</a></td>
+</tr>
+</table>
+    
+
+<br><br><br>
+</div> 
+  
+  
+
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,95 @@
+{% extends "layout.html" %}
+{% block content%}
+<html>
+    <head>
+        <title>Ürün Ekleme Sayfası</title>
+       
+    </head>
+    <body>
+        {% csrf_token %}
+        
+       <div  class="d-flex flex-col justify-content-center">
+        <form action="/addProduce/" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+            <label for="">Ürün Resmi</label><br><br>
+            <input type="file" name="files[]" id="files" >
+            <input type="hidden" name="produceImageURL">
+            <button type="button" class="form-control-file btn btn-primary mt-4" onclick="uploadimage()">Upload</button>
+            </div>
+            <div class="form-group">
+                <label>Ürün Adı</label>
+                <input type="text" class="form-control" name="produceName">
+              </div>
+              <div class="form-group">
+                <label>Kategori Seç</label>
+                <select class="form-control" name="produceCategory">
+                  <option>Kategori Seç</option>
+                  <option>Gıda</option>
+                  <option>Temizlik</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label>Ürün Stok Sayısı</label>
+                <input type="text" class="form-control" name="produceStock">
+              </div>
+
+              <input type="hidden" name="produceImageURL" id="url2">
+              
+              <div class="form-group">
+                <label>Ürün Fiyatı</label>
+                <input type="text" class="form-control" name="producePrice">
+              </div>
+
+              <div class="form-group">
+                <label>Ürün Açıklaması</label>
+                <textarea class="form-control"  name="produceDescription" cols="30" rows="10"></textarea>
+              </div>
+
+            
+
+
+
+            <input type="submit" class="form-control btn btn-success" value="Ürün Ekle">
+
+
+
+
+
+
+            
+        </form>
+    </div>
+        <script src="https://www.gstatic.com/firebasejs/3.7.4/firebase.js"></script>
+        <script>
+            var firebaseConfig = {
+            apiKey: "AIzaSyAJWG0xm07jgDfNedQNBh3GECi-PbjhNY4",
+            authDomain: "ticaret-22.firebaseapp.com",
+            databaseURL:  "https://ticaret-22-default-rtdb.firebaseio.com/",
+            storageBucket:  "ticaret-22.appspot.com",
+          };
+          firebase.initializeApp(firebaseConfig);
+          function uploadimage(){
+          var storage = firebase.storage();
+          var file=document.getElementById("files").files[0];
+          var storageref=storage.ref();
+          var thisref=storageref.child(file.name).put(file);
+          thisref.on('state_changed',function(snapshot) {
+          console.log('Done');
+         
+          }, function(error) {
+          console.log('Error',error);
+         
+        }, function() {
+          // Uploaded completed successfully, now we can get the download URL
+          thisref.snapshot.ref.getDownloadURL().then(function(downloadURL) {
+            console.log('File available at', downloadURL);
+            document.getElementById("url2").value=downloadURL;
+            console.log("Uploaded Successfully")
+          });
+        });
+        }
+        </script>
+    </body>
+</html>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+{% block content%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Müşteri Listeleme Sayfası</title>
+</head>
+<body>
+    {% csrf_token %}
+<div class="container">
+    <div class="row">
+{% for per in customerlist %}
+<div class="col-sm-12 col-md-12 col-lg-6 d-flex flex-col justify-content-center">
+    <div class="card mt-4 p-2" style="width: 28rem;">
+        <h5 class="card-title text-center">{{per.customerName}} {{per.customerSurname}} <br></h5>
+        <div class="card-body">
+Müşteri Id : {{per.customerId}} <br>
+Müşteri Vergi Numarası : {{per.customerVergiNo}} <br>
+Müşteri Adresi : {{per.customerAdress}} <br>
+Müşteri Telefon Numarası : {{per.customerPhoneNumber}} 
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+</body>
+</html>
+{% endblock %}
